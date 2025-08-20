@@ -46,7 +46,7 @@ if(mysqli_num_rows($result) > 0)
                     <td><?= htmlspecialchars($row['username']) ?></td>
                     <td>
                         <a href="update-admin.php?id=<?=$row['id']?>" class="btn-success">Update</a>
-                        <a href="delete-admin.php?id=<?=$row['id']?>" class="btn-danger">Delete</a>
+                        <a href="#" class="btn-danger btn" data-id="<?= $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                     </td>
                 </tr>
                 <?php } ?>
@@ -54,26 +54,43 @@ if(mysqli_num_rows($result) > 0)
         </div>
     </div>
 
-    <!-- Delete modal starts here  -->
-    <div class="modal" tabindex="-1">
-        <div class="modal-dialog">
+    <!-- Delete modal starts here -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="delete-admin.php" method="post">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this admin?</p>
+                    <input type="hidden" name="id" id="delete_id">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                </div>
             </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-        </div>
+        </form>
     </div>
-    <!-- Delete modal ends here  -->
+</div>
+<!-- Delete modal ends here -->
+
 
     <!--  Main content section ends here  -->
 
    <?php include_once('partials/footer.php'); ?>
+
+   <!-- jQuery CDN (only if using jQuery) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).on('click', '.btn-danger', function () {
+    var id = $(this).data('id');
+    $('#delete_id').val(id);
+});
+</script>
