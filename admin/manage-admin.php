@@ -4,14 +4,51 @@
 // Displaying Alert after adding admin 
 if(isset($_SESSION['add'])){
     $color = $_SESSION['add'] == 'Admin added successfully.' ? 'success':'danger';
+    $boldText = $color == 'danger' ? 'Failed!':'Success!';
         echo '<div class="alert alert-'.$color.' alert-dismissible fade show" role="alert">
-                <strong>Success!</strong> '.$_SESSION['add'].'
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <strong>'.$boldText.'</strong> '.$_SESSION['add'].'
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>';
         unset($_SESSION['add']);    
     }
+ 
+if(isset($_SESSION['delete'])){
+    $color = $_SESSION['delete'] == 'Admin deleted successfully.' ? 'success':'danger';
+    $boldText = $color == 'danger' ? 'Failed!':'Success!';
+        echo '<div class="alert alert-'.$color.' alert-dismissible fade show" role="alert">
+                <strong>'.$boldText.'</strong> '.$_SESSION['delete'].'
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
+        unset($_SESSION['delete']);
+}  
+
+if(isset($_SESSION['update'])){
+    $color = $_SESSION['update'] == 'Admin updated successfully.' ? 'success':'danger';
+    $boldText = $color == 'danger' ? 'Failed!':'Success!';
+        echo '<div class="alert alert-'.$color.' alert-dismissible fade show" role="alert">
+                <strong>'.$boldText.'</strong> '.$_SESSION['update'].'
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
+        unset($_SESSION['update']);
+} 
+
+if(isset($_SESSION['is-user-found'])){
+    $color = $_SESSION['is-user-found'] == 'Password Updated Successfully.' ? 'success':'danger';
+    $boldText = $color == 'danger' ? 'Failed!':'Success!';
+        echo '<div class="alert alert-'.$color.' alert-dismissible fade show" role="alert">
+                <strong>'.$boldText.'</strong> '.$_SESSION['is-user-found'].'
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>';
+        unset($_SESSION['is-user-found']);
+}
 
 // Select data to display in table below
 $sql = "select * from admin;";
@@ -45,6 +82,7 @@ if(mysqli_num_rows($result) > 0)
                     <td><?= htmlspecialchars($row['full_name']) ?></td>
                     <td><?= htmlspecialchars($row['username']) ?></td>
                     <td>
+                        <a href="update-password.php?id=<?=$row['id']?>" class="btn-primary">Change Password</a>
                         <a href="update-admin.php?id=<?=$row['id']?>" class="btn-success">Update</a>
                         <a href="#" class="btn-danger btn" data-id="<?= $row['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                     </td>

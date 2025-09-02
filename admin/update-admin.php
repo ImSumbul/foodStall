@@ -2,7 +2,7 @@
 
 <div class="main-content">
     <div class="wrapper-container">
-        <h1>Add Admin</h1>
+        <h1>Update Admin</h1>
         <form action="" method="post">
             <table class="tbl-30">
                 <tr>
@@ -14,10 +14,6 @@
                 <tr>
                     <td>Username</td>
                     <td><input type="text" name="username" placeholder="Enter your username"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name="password" placeholder="Enter your password"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -36,20 +32,20 @@
 
 if(isset($_POST['submit']))
 {
+    $id = $_GET['id'];
     $name = $_POST['full_name'];
     $username = $_POST['username'];
-    $password = md5($_POST['password']); 
 
-    $sql = "insert into admin (full_name,username,password) values('$name','$username','$password');";
+    $sql = "update admin set full_name = '$name', username = '$username' where id = $id;";
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
     if($result)
     {
-        $_SESSION['add'] = 'Admin added successfully.';
+        $_SESSION['update'] = 'Admin updated successfully.';
         header('Location:manage-admin.php');
     }
     else
     {
-        $_SESSION['add'] = 'Failed to add Admin.';
+        $_SESSION['update'] = 'Failed to update Admin.';
         header('Location:manage-admin.php');   
     }
 }

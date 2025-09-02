@@ -6,7 +6,17 @@ $id = $_POST['id'];
 // die();
 // delete query 
 $sql = "delete from admin where id = $id";
-$mysqli_query($conn,$sql);
+$result = mysqli_query($conn,$sql);
 // redirect to manage-admin page 
-header('Location:manage-admin.php');
+if($result)
+{
+    $_SESSION['delete'] = "Admin deleted successfully.";
+    header('Location:manage-admin.php');
+}
+else
+{
+    $_SESSION['delete'] = "Failed to delete admin. Try again later.";
+    header('Location:manage-admin.php');
+}
+
 ?>

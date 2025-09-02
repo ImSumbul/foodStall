@@ -16,6 +16,12 @@
     width : 80%;
     margin : 0 auto;
 }
+.wrapper-container{
+    /* border : 1px solid black; */
+    padding : 1%;
+    width : 36%;
+    margin : auto auto;
+}
 
 .text-center{
     text-align : center;
@@ -30,7 +36,7 @@
     width: 100%;
 }
 .tbl-30{
-    width: 30%;
+    width: 100%;
 }
 table tr th{
     border-bottom: 1px solid black;
@@ -39,6 +45,7 @@ table tr th{
 }
 table tr td{
     padding: 1%;
+    width: 10%;
 }
 .btn-primary{
     background-color: #0984e3;
@@ -97,6 +104,7 @@ table tr td{
 /* css for main content  */
 .main-content{
     /* margin: 1% 0; */
+    display: flex;
     background-color: #f1f2f6;
     padding: 3% 0;
 }
