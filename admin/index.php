@@ -1,9 +1,8 @@
 <?php include_once('partials/menu.php'); ?>
 <?php
-$sql = "select COUNT(1) cnt from category";
-$result = $conn->query($sql);
-
-$category_count = $result->fetch_assoc()['cnt'];
+$sql_category = "select COUNT(1) cnt from category";
+$result_category = $conn->query($sql_category);
+$category_count = $result_category->fetch_assoc()['cnt'];
 ?>
 
 
